@@ -165,7 +165,7 @@ let app = new Vue ({
         // Updates current section title to display in full in nav/progress bar whilst minimising other section titles
         currentTitle: function (newValue, oldValue) {
 
-            app.swapTitles(newValue, oldValue)
+            this.swapTitles(newValue, oldValue)
         },
 
         // Removes and adds scripts depending on which section is at top of visible part of journey and which tab is open
@@ -192,16 +192,16 @@ let app = new Vue ({
         // $nextTick ensures initial functions only run once Vue is initialised sufficiently
         this.$nextTick ( function () {
             // makes n equal to total number of sections
-            app.n = document.querySelectorAll(".section-container").length;
+            this.n = document.querySelectorAll(".section-container").length;
             // calculates initial div section positions in journey with respect to the top
-            app.sectionPos();
+            this.sectionPos();
             // checks if journey div height changes every x seconds
             // if it does change, re-runs sectionPos to calculate section div positions
-            app.journeyHeightOld = document.querySelectorAll(".journey")[0].scrollHeight;
+            this.journeyHeightOld = document.querySelectorAll(".journey")[0].scrollHeight;
             window.setInterval(() => {
-                app.journeyHeightNew = document.querySelectorAll(".journey")[0].scrollHeight;
-                if (app.journeyHeightOld !== app.journeyHeightNew) {
-                    app.journeyHeightOld = app.journeyHeightNew;
+                this.journeyHeightNew = document.querySelectorAll(".journey")[0].scrollHeight;
+                if (this.journeyHeightOld !== this.journeyHeightNew) {
+                    this.journeyHeightOld = this.journeyHeightNew;
                     this.sectionPos();
                 }
             },2000)
